@@ -61,7 +61,7 @@ class Commander(object):
 
         # Publish waypoints as pose array - visualise them in rviz
         self.pose_array_publisher = rospy.Publisher(
-            self.waypoints_list_topic, PoseArray, queue_size=1
+            self.waypoints_list_topic, PoseArray, queue_size=1, latch=True
         )
 
         # Listen to the goal locations
@@ -85,6 +85,7 @@ class Commander(object):
 
         if self.waypoints:
             self.waypoints = []
+            self.pose_array_publisher.publish(toPoseArray(self.waypoints))
 
         return (True, "")
 
