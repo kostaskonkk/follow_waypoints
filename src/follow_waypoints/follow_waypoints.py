@@ -151,6 +151,7 @@ class Commander(object):
                 self.move_base_client.wait_for_result()
                 info("Waiting for %f sec..." % self.wait_duration)
                 time.sleep(self.wait_duration)
+                self.pose_array_publisher.publish(toPoseArray(self.waypoints))
             else:
                 raise NotImplementedError("distance_tolerance not implemented yet.")
 
